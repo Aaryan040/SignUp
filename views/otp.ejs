@@ -1,0 +1,108 @@
+<%- include("partials/header.ejs") %>
+
+<div
+  class="container d-flex justify-content-center align-items-center"
+  style="min-height: 100vh"
+>
+  <div class="otp text-center">
+    <h1>Enter OTP</h1>
+    <form
+      action="/verify"
+      class="form d-flex justify-content-center gap-2"
+      method="post"
+    >
+      <input
+        type="text"
+        name="input1"
+        id="text1"
+        maxlength="1"
+        class="otp-input text-center"
+      />
+      <input
+        type="text"
+        name="input2"
+        id="text2"
+        maxlength="1"
+        class="otp-input text-center"
+      />
+      <input
+        type="text"
+        name="input3"
+        id="text3"
+        maxlength="1"
+        class="otp-input text-center"
+      />
+      <input
+        type="text"
+        name="input4"
+        id="text4"
+        maxlength="1"
+        class="otp-input text-center"
+      />
+      <input
+        type="text"
+        name="input5"
+        id="text5"
+        maxlength="1"
+        class="otp-input text-center"
+      />
+      <input
+        type="text"
+        name="input6"
+        id="text6"
+        maxlength="1"
+        class="otp-input text-center"
+      /><br />
+      <input type="hidden" name="email" value="<%= email %>" />
+      <button type="submit" class="btn btn-primary mt-3">Submit</button>
+    </form>
+  </div>
+</div>
+
+<style>
+  .otp-input {
+    width: 50px;
+    height: 50px;
+    font-size: 2rem;
+    text-align: center;
+    margin: 0 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+</style>
+
+<script>
+  const inputs = document.querySelector(".form");
+  inputs.addEventListener("input", function (e) {
+    const target = e.target;
+    const val = target.value;
+
+    if (isNaN(val)) {
+      target.value = "";
+      return;
+    }
+
+    if (val != "") {
+      const next = target.nextElementSibling;
+      if (next) {
+        next.focus();
+      }
+    }
+  });
+
+  inputs.addEventListener("keyup", function (e) {
+    const target = e.target;
+    const key = e.key.toLowerCase();
+
+    if (key == "backspace" || key == "delete") {
+      target.value = "";
+      const prev = target.previousElementSibling;
+      if (prev) {
+        prev.focus();
+      }
+      return;
+    }
+  });
+</script>
+
+<%- include("partials/footer.ejs") %>
